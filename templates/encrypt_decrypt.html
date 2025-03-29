@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block main %}
+<div class="flex gap-1.5 items-center mt-2 mb-4 font-bold">
+  <a href="/" class="btn-icon">
+    <img src="/static/img/arrow_back.svg" alt="">
+  </a>
+  Encrypt / Decrypt
+</div>
+<form method="post">
+  <label for="conf">Interlocutor configuration</label>
+  <textarea name="conf" id="conf" rows="3" class="input break-all mb-4">{{ conf }}</textarea>
+  <label for="password">Password</label>
+  <div class="relative mb-4">
+    <input type="password" id="password" name="password" value="{{ password }}" class="input">
+    <button type="button" class="btn-toggle-password">
+      <img src="/static/img/visibility_off.svg" alt="">
+    </button>
+  </div>
+  <label for="input_text">Input text</label>
+  <textarea name="input_text" id="input_text" rows="3" class="input break-all mb-4">{{ input_text }}</textarea>
+  <div class="flex items-center gap-4 mb-6">
+    <div class="flex gap-1">
+      <input type="radio" id="encrypt" name="operation" value="encrypt"{% if operation == 'encrypt' %} checked{% endif %}>
+      <label for="encrypt">Encrypt</label>
+    </div>
+    <div class="flex gap-1">
+      <input type="radio" id="decrypt" name="operation" value="decrypt"{% if operation == 'decrypt' %} checked{% endif %}>
+      <label for="decrypt">Decrypt</label>
+    </div>
+  </div>
+  <button type="submit" class="btn-main flex items-center gap-1.5">
+    <span class="loader text-indigo-300 hidden"></span>Submit
+  </button>
+</form>
+{% if output_text %}
+<div id="output_text" class="{% if operation == 'encrypt' %}break-all {% endif %}mt-4">{{ output_text }}</div>
+<button class="btn-secondary mt-4" copy="output_text">Copy to clipboard</button>
+{% endif %}
+{% endblock %}

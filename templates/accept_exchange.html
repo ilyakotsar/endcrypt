@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block main %}
+<div class="flex gap-1.5 items-center mt-2 mb-4 font-bold">
+  <a href="/" class="btn-icon">
+    <img src="/static/img/arrow_back.svg" alt="">
+  </a>
+  Accept exchange
+</div>
+<form method="post">
+  <label for="conf_a">Interlocutor configuration</label>
+  <textarea name="conf_a" id="conf_a" rows="3" class="input break-all mb-4">{{ conf_a }}</textarea>
+  <label for="password">Password</label>
+  <div class="relative mb-6">
+    <input type="password" id="password" name="password" value="{{ password }}" class="input">
+    <button type="button" class="btn-toggle-password">
+      <img src="/static/img/visibility_off.svg" alt="">
+    </button>
+  </div>
+  <button type="submit" class="btn-main flex items-center gap-1.5">
+    <span class="loader text-indigo-300 hidden"></span>Create configuration
+  </button>
+</form>
+{% if conf_b %}
+<div id="conf_b" class="break-all mt-4">{{ conf_b }}</div>
+<button class="btn-secondary mt-4" copy="conf_b">Copy to clipboard</button>
+{% endif %}
+{% endblock %}

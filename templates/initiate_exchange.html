@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block main %}
+<div class="flex gap-1.5 items-center mt-2 mb-4 font-bold">
+  <a href="/" class="btn-icon">
+    <img src="/static/img/arrow_back.svg" alt="">
+  </a>
+  Initiate exchange
+</div>
+<form method="post">
+  <div class="text-gray-500 text-sm font-light mb-0.5">Diffie-Hellman key exchange:</div>
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-3 gap-y-4 mb-4">
+    <div>
+      <label for="key_size">Key size, Bit</label>
+      <input id="key_size" name="key_size" type="number" min="1500" max="2048" value="{{ key_size }}" class="input">
+    </div>
+    <div>
+      <label for="g">g</label>
+      <select name="g" id="g" class="input">
+        <option value="2"{% if g == 2 %} selected{% endif %}>2</option>
+        <option value="5"{% if g == 5 %} selected{% endif %}>5</option>
+      </select>
+    </div>
+  </div>
+  <div class="text-gray-500 text-sm font-light mb-0.5">Argon2id KDF:</div>
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-x-3 gap-y-4 mb-4">
+    <div>
+      <label for="iterations">Iterations</label>
+      <input id="iterations" name="iterations" type="number" min="1" max="30" value="{{ iterations }}" class="input">
+    </div>
+    <div>
+      <label for="memory">Memory, MiB</label>
+      <input id="memory" name="memory" type="number" min="10" max="300" value="{{ memory }}" class="input">
+    </div>
+    <div>
+      <label for="parallelism">Parallelism</label>
+      <input id="parallelism" name="parallelism" type="number" min="1" max="20" value="{{ parallelism }}" class="input">
+    </div>
+  </div>
+  <label for="password">Password</label>
+  <div class="relative mb-6">
+    <input type="password" id="password" name="password" value="{{ password }}" class="input">
+    <button type="button" class="btn-toggle-password">
+      <img src="/static/img/visibility_off.svg" alt="">
+    </button>
+  </div>
+  <button type="submit" class="btn-main flex items-center gap-1.5">
+    <span class="loader text-indigo-300 hidden"></span>Create configuration
+  </button>
+</form>
+{% if conf %}
+<div id="conf" class="break-all mt-4">{{ conf }}</div>
+<button class="btn-secondary mt-4" copy="conf">Copy to clipboard</button>
+{% endif %}
+{% endblock %}

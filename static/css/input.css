@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+@theme {
+    --font-sans: 'Manrope', sans-serif;
+    --font-mono: monospace;
+}
+
+@font-face {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 200 800;
+    src: url('../fonts/Manrope-VariableFont.woff2') format('woff2');
+}
+
+html {
+    color-scheme: dark;
+}
+.btn-main, .btn-secondary {
+    padding-block: calc(var(--spacing) * 1);
+    padding-inline: calc(var(--spacing) * 3);
+    font-weight: var(--font-weight-semibold);
+    border-radius: var(--radius-sm);
+    border-style: solid;
+    border-width: 2px;
+    border-color: transparent;
+}
+.btn-main {
+    background-color: var(--color-indigo-900);
+}
+.btn-main:hover {
+    background-color: var(--color-indigo-700);
+}
+.btn-secondary {
+    background-color: var(--color-slate-700);
+}
+.btn-secondary:hover {
+    background-color: var(--color-slate-600);
+}
+.btn-icon {
+    padding: calc(var(--spacing) * 1);
+    border-radius: var(--radius-sm);
+}
+.btn-icon:hover {
+    background-color: var(--color-gray-800);
+}
+.btn-toggle-password {
+    position: absolute;
+    right: calc(var(--spacing) * 1);
+    bottom: calc(var(--spacing) * 1);
+    padding: calc(var(--spacing) * 1.5);
+}
+.btn-toggle-password:hover {
+    filter: brightness(200%);
+}
+.input {
+    background-color: inherit;
+    padding-block: calc(var(--spacing) * 1);
+    padding-inline: calc(var(--spacing) * 2);
+    width: 100%;
+    border-radius: 0.25rem;
+    border-style: solid;
+    border-width: 2px;
+    border-color: var(--color-gray-800);
+    outline-style: none;
+}
+.input:hover {
+    border-color: var(--color-gray-700);
+}
+.input:focus {
+    border-color: var(--color-indigo-500);
+}
+.relative .input {
+    padding-right: calc(var(--spacing) * 8) !important;
+}
+button {
+    cursor: pointer;
+}
+label {
+    display: block;
+    width: fit-content;
+    padding-bottom: 1px;
+}
+select.input {
+    min-height: 35.61px;
+}
+option {
+    background-color: var(--color-gray-900);
+}
+button img {
+    pointer-events: none;
+}
+.loader {
+    width: 16px;
+    height: 16px;
+    border: 2px solid currentColor;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+.loader.hidden {
+    display: none !important;
+}
