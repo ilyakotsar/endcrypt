@@ -1,15 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-    --font-sans: 'Manrope', sans-serif;
+    --font-sans: system-ui, sans-serif;
     --font-mono: monospace;
-}
-
-@font-face {
-    font-family: 'Manrope';
-    font-style: normal;
-    font-weight: 200 800;
-    src: url('../fonts/Manrope-VariableFont.woff2') format('woff2');
 }
 
 html {
@@ -50,7 +43,7 @@ html {
     padding: calc(var(--spacing) * 1.5);
 }
 .btn-toggle-password:hover {
-    filter: brightness(200%);
+    filter: brightness(150%);
 }
 .input {
     background-color: inherit;
@@ -72,32 +65,35 @@ html {
 .relative .input {
     padding-right: calc(var(--spacing) * 8) !important;
 }
-button {
-    cursor: pointer;
+select.input {
+    min-height: 35.61px;
 }
 label {
     display: block;
     width: fit-content;
     padding-bottom: 1px;
 }
-select.input {
-    min-height: 35.61px;
-}
 option {
     background-color: var(--color-gray-900);
+}
+button {
+    cursor: pointer;
 }
 button img {
     pointer-events: none;
 }
 .loader {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
     border: 2px solid currentColor;
     border-bottom-color: transparent;
     border-radius: 50%;
     display: inline-block;
     box-sizing: border-box;
     animation: rotation 1s linear infinite;
+}
+.loader.hidden {
+    display: none !important;
 }
 @keyframes rotation {
     0% {
@@ -106,7 +102,4 @@ button img {
     100% {
         transform: rotate(360deg);
     }
-}
-.loader.hidden {
-    display: none !important;
 }
