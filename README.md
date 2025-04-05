@@ -4,7 +4,7 @@ Desktop application for end-to-end message encryption.
 
 ## Installation
 
-1. Download [EndCrypt](https://github.com/ilyakotsar/endcrypt/archive/refs/heads/main.zip) and unzip it
+1. Download [EndCrypt](https://github.com/ilyakotsar/endcrypt/archive/refs/tags/v1.0.0.zip) and unzip it
 2. Install [Python](https://www.python.org/downloads/)
 3. Run install.bat
 4. Run EndCrypt.bat
