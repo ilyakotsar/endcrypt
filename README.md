@@ -21,5 +21,5 @@ Diffie-hellman key exchange, Argon2id, AES-256 (CBC), SHAKE256 to convert passwo
 
 ## Requirements
 
-[cryptography](https://github.com/pyca/cryptography)
-[Flask](https://github.com/pallets/flask)
+- [cryptography](https://github.com/pyca/cryptography)
+- [Flask](https://github.com/pallets/flask)
