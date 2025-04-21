@@ -30,27 +30,30 @@ html {
     background-color: var(--color-slate-600);
 }
 .btn-icon {
+    color: var(--color-gray-300);
     padding: calc(var(--spacing) * 1);
     border-radius: var(--radius-sm);
 }
 .btn-icon:hover {
+    color: inherit;
     background-color: var(--color-gray-800);
 }
 .btn-toggle-password {
+    color: var(--color-gray-500);
     position: absolute;
     right: calc(var(--spacing) * 1);
     bottom: calc(var(--spacing) * 1);
     padding: calc(var(--spacing) * 1.5);
 }
 .btn-toggle-password:hover {
-    filter: brightness(150%);
+    color: var(--color-gray-300);
 }
 .input {
     background-color: inherit;
     padding-block: calc(var(--spacing) * 1);
     padding-inline: calc(var(--spacing) * 2);
     width: 100%;
-    border-radius: 0.25rem;
+    border-radius: var(--radius-sm);
     border-style: solid;
     border-width: 2px;
     border-color: var(--color-gray-800);
@@ -65,21 +68,20 @@ html {
 .relative .input {
     padding-right: calc(var(--spacing) * 8) !important;
 }
-select.input {
-    min-height: 35.61px;
-}
 label {
     display: block;
     width: fit-content;
     padding-bottom: 1px;
 }
-option {
-    background-color: var(--color-gray-900);
-}
-button {
+button, label, input[type="radio"] {
     cursor: pointer;
 }
-button img {
+svg {
+    width: 1em;
+    height: 1em;
+    fill: currentColor;
+}
+button svg, button span {
     pointer-events: none;
 }
 .loader {

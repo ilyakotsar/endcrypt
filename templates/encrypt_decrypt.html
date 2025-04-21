@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% block main %}
-<div class="flex gap-1.5 items-center mt-2 mb-4 font-bold">
+<div class="flex gap-1 items-center mt-2 mb-4 font-bold">
   <a href="/" class="btn-icon">
-    <img src="/static/img/arrow_back.svg" alt="">
+    {% include 'icons/arrow_back.html' %}
   </a>
   Encrypt / Decrypt
 </div>
@@ -13,7 +13,7 @@
   <div class="relative mb-4">
     <input type="password" id="password" name="password" value="{{ password }}" class="input">
     <button type="button" class="btn-toggle-password">
-      <img src="/static/img/visibility_off.svg" alt="">
+      {% include 'icons/visibility_off.html' %}
     </button>
   </div>
   <label for="input_text">Input text</label>
@@ -28,7 +28,7 @@
       <label for="decrypt">Decrypt</label>
     </div>
   </div>
-  <button type="submit" class="btn-main flex items-center gap-1.5">
+  <button type="submit" class="btn-main flex items-center gap-1">
     <span class="loader text-indigo-300 hidden"></span>Submit
   </button>
 </form>

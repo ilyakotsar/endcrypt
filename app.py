@@ -34,8 +34,8 @@ def get_public_key(g: int, private_key: int, p: int) -> int:
     return public_key
 
 
-def get_shared_key(public_key: int, private_key: int, p: int) -> int:
-    shared_key = pow(public_key, private_key, p)
+def get_shared_key(inter_public_key: int, private_key: int, p: int) -> int:
+    shared_key = pow(inter_public_key, private_key, p)
     return shared_key
 
 
@@ -102,7 +102,9 @@ def initiate_exchange():
         private_key = get_private_key(password, p)
         public_key = get_public_key(g, private_key, p)
         salt = generate_salt_b64()
-        conf = '_'.join([salt, iterations, memory, parallelism, str(g), str(p), str(public_key)])
+        conf_list = ['A', salt, iterations, memory, parallelism]
+        conf_list.extend([str(g), str(p), str(public_key)])
+        conf = '_'.join(conf_list)
         context = {
             'key_size': key_size,
             'g': g,
@@ -129,11 +131,12 @@ def accept_exchange():
         conf_a = request.form['conf_a']
         password = request.form['password']
         conf_a_list = conf_a.split('_')
-        g = int(conf_a_list[4])
-        p = int(conf_a_list[5])
+        g = int(conf_a_list[5])
+        p = int(conf_a_list[6])
         private_key = get_private_key(password, p)
         public_key = get_public_key(g, private_key, p)
-        conf_a_list[6] = str(public_key)
+        conf_a_list[0] = 'B'
+        conf_a_list[7] = str(public_key)
         conf_b = '_'.join(conf_a_list)
         context = {
             'conf_a': conf_a,
@@ -152,22 +155,26 @@ def encrypt_decrypt():
         input_text = request.form['input_text']
         operation = request.form['operation']
         conf_list = conf.split('_')
-        salt = conf_list[0]
-        iterations = int(conf_list[1])
-        memory = int(conf_list[2])
-        parallelism = int(conf_list[3])
-        p = int(conf_list[5])
-        inter_public_key = int(conf_list[6])
+        salt = conf_list[1]
+        iterations = int(conf_list[2])
+        memory = int(conf_list[3])
+        parallelism = int(conf_list[4])
+        p = int(conf_list[6])
+        inter_public_key = int(conf_list[7])
         private_key = get_private_key(password, p)
         shared_key = get_shared_key(inter_public_key, private_key, p)
         key = get_encryption_key(salt, iterations, memory, parallelism, shared_key)
         if operation == 'encrypt':
             iv, ciphertext = encrypt_text(input_text, key)
-            output_text = '_'.join([iv, ciphertext])
+            if conf_list[0] == 'A':
+                user = 'B'
+            else:
+                user = 'A'
+            output_text = '_'.join([user, iv, ciphertext])
         elif operation == 'decrypt':
             input_text_list = input_text.split('_')
-            iv = input_text_list[0]
-            ciphertext = input_text_list[1]
+            iv = input_text_list[1]
+            ciphertext = input_text_list[2]
             output_text = decrypt_text(iv, ciphertext, key)
         context = {
             'conf': conf,

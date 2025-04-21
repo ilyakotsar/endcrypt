@@ -1,14 +1,15 @@
 document.querySelectorAll('.btn-toggle-password').forEach(btn => {
     btn.addEventListener('click', function() {
-        let img = btn.querySelector('img');
         let password = document.getElementById('password');
+        let icon;
         if (password.type === 'password') {
             password.type = 'text';
-            img.src = '/static/img/visibility.svg';
+            icon = 'visibility-icon';
         } else {
             password.type = 'password';
-            img.src = '/static/img/visibility_off.svg';
+            icon = 'visibility-off-icon';
         }
+        btn.innerHTML = document.getElementById(icon).innerHTML;
     });
 });
 
